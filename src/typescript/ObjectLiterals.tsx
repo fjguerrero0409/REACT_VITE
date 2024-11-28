@@ -4,10 +4,12 @@ interface Person{
     age:number,
     firstname:string
     lastname:string
-    address:{
-        country:string,
-        house:number
-    }
+    address:address
+}
+
+interface address{
+    country:string,
+    house:number;
 }
 
 
