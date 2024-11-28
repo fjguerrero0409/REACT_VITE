@@ -1,10 +1,22 @@
 import React from 'react'
 
+interface Person{
+    age:number,
+    firstname:string
+    lastname:string
+    address:{
+        country:string,
+        house:number
+    }
+}
+
+
+
 export default function ObjectLiterals() {
-const person={
+const person:Person={
+    age:26,
     firstname:'Francine',
     lastname:'Guerrero',
-    age:'26',
     address:{
         country:'Ecuador',
         house:256
