@@ -1,27 +1,38 @@
 import { createContext, PropsWithChildren, useContext, useState } from "react";
 
 enum StateTest {
-    'checking',
+    'cheking',
     'login',
     'closed',
     'authenticated'
 }
 
-export const AuthContext = createContext({});
+interface AuthState {
+    state: StateTest
+    loginEmailWithPassword: (email: string, password: string) => void
+    logOut: () => void
+}
 
-export const useAuthContext = () => useContext(AuthContext);
+export const AuthContext = createContext({} as AuthState)
+
+export const useAuthContext = () => useContext(AuthContext)
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  
-    const [state, setstate] = useState(StateTest.checking);
-  
-  
-  return (<AuthContext.Provider value={{
+    const [state, setState] = useState(StateTest.cheking)
 
-    state:state
-    
+    const loginEmailWithPassword = (email: string, password: string) => {
+        setState(StateTest.login)
+    }
 
-  }}>
-    {children}
-    </AuthContext.Provider>);
-};
+    const logOut = () => {
+        setState(StateTest.closed)
+    }
+
+    return (<AuthContext.Provider value={{
+        state: state,
+        loginEmailWithPassword,
+        logOut
+    }}>
+        {children}
+    </AuthContext.Provider>)
+}   
